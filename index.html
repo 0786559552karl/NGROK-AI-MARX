@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Bot Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fab fa-whatsapp"></i> WhatsApp Bot Dashboard</h1>
+                <div class="status" id="status">
+                    <span class="status-indicator" id="statusIndicator"></span>
+                    <span id="statusText">Connecting...</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- QR Code Section -->
+        <div id="qrSection" class="qr-section hidden">
+            <div class="qr-container">
+                <h3>Scan QR Code</h3>
+                <div id="qrCode" class="qr-code"></div>
+                <p>Scan this QR code with WhatsApp to connect</p>
+                <button id="refreshQr" class="btn btn-secondary">
+                    <i class="fas fa-refresh"></i> Refresh QR
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Dashboard -->
+        <div id="dashboard" class="dashboard hidden">
+            <!-- Messages Section -->
+            <div class="messages-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-comments"></i> Recent Messages</h2>
+                    <button id="sendMessageBtn" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </div>
+                <div class="messages-container" id="messagesContainer">
+                    <div class="message-placeholder">
+                        <i class="fas fa-inbox"></i>
+                        <p>No messages yet. Send a message to start!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contacts Section -->
+            <div class="contacts-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-users"></i> Recent Contacts</h2>
+                </div>
+                <div class="contacts-container" id="contactsContainer">
+                    <div class="contact-placeholder">
+                        <i class="fas fa-user-friends"></i>
+                        <p>Loading contacts...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <div class="action-card">
+                    <i class="fas fa-broadcast-tower"></i>
+                    <h3>Broadcast</h3>
+                    <p>Send message to multiple contacts</p>
+                </div>
+                <div class="action-card">
+                    <i class="fas fa-robot"></i>
+                    <h3>Auto Reply</h3>
+                    <p>Set up automatic responses</p>
+                </div>
+                <div class="action-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Analytics</h3>
+                    <p>View message statistics</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Send Message Modal -->
+        <div id="sendMessageModal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-paper-plane"></i> Send Message</h3>
+                    <button id="closeModal" class="close-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="phoneNumber">Phone Number</label>
+                        <input type="tel" id="phoneNumber" placeholder="+1234567890" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="messageText">Message</label>
+                        <textarea id="messageText" rows="4" placeholder="Type your message here..." required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="cancelSend" class="btn btn-secondary">Cancel</button>
+                    <button id="sendMessage" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Send
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Socket.IO Client -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
